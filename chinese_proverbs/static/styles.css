@@ -1,0 +1,61 @@
+
+body {
+    padding: 20px;
+    background-image: url('img/wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#logo {
+    position: relative;
+}
+
+#pinyin {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-stretch: condensed;
+    line-height: 0px;
+}
+
+h2 {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 45px;
+    line-height: 0px;
+}
+
+h3 {
+    font-family: 'Arapey', serif;
+    font-size: 24px;
+}
+
+#proverb-container {
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+    position: fixed;
+    bottom: 101px;
+    left: 82px;
+}
+
+@media only screen and (max-width: 1300px) {
+    h2{
+        line-height: normal;
+    }
+
+    #proverb-container {
+        text-align: center;
+        bottom: 40px;
+        left: auto;
+        vertical-align: middle;
+    }
+}
+@media only screen and (max-width: 900px) {
+    h2{
+        line-height: 44px;
+    }
+    #pinyin {
+        line-height: 15px;
+    }
+}
