@@ -20,7 +20,7 @@ app.config[
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-from chinese_proverbs.load_data import csv_to_db
+from load_data import csv_to_db
 
 csv_to_db()
 
