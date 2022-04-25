@@ -29,6 +29,10 @@ from chinese_proverbs.models.ProverbsModel import ProverbsModel, db
 db.init_app(app)
 migrate = Migrate(app, db)
 
+# create health end point
+@app.route("/health")
+def check():
+    return {"message": "200, Website is running"}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
