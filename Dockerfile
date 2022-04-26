@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 COPY . /chineseproverbs
 
 RUN chmod u+x ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh", "./entrypoint.sh"]
