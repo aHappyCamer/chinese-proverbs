@@ -1,5 +1,10 @@
 venv
 chinese_proverbs/.env
+.cache/
+.pytest_cache/
+.idea/
+docs/_build/
+.vscode
 
 # Local .terraform directories
 terraform/
