@@ -7,4 +7,5 @@ RUN pip install -r requirements.txt
 
 COPY . /chineseproverbs
 
-CMD ["gunicorn", "wsgi:app", "-w 2", "-b 0.0.0.8:80"]
+RUN chmod u+x ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh]
