@@ -30,7 +30,7 @@ jobs:
 
       -  name: Print project root directory
          run: >
-           ssh -i ~/.ssh/deploy.key -o UserKnownHostsFile=/github/home/.ssh/known_hosts -tt $SSH_USER@$SSH_IP "echo test > testfile1"
+           ssh -i ~/.ssh/deploy.key -o UserKnownHostsFile=/github/home/.ssh/known_hosts $SSH_USER@$SSH_IP
            'cd ${{ secrets.PROJECT_ROOT }}
            && sudo git fetch
            && sudo git reset --hard origin/main
