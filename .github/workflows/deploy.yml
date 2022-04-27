@@ -21,7 +21,7 @@ jobs:
           Host my-vm
             HostName $SSH_IP
             User $SSH_USER
-            IdentityFile ~/.ssh/deploy-key.pub
+            IdentityFile ~/.ssh/deploy.key
             StrictHostKeyChecking no
             UserKnownHostsFile ~/.ssh/known_hosts
           END
