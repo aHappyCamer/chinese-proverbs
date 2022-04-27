@@ -24,20 +24,15 @@ jobs:
         run: >
           echo "CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }} > nginx-certbot.env &&
           touch .env &&
-          echo "URL=localhost:5000" >> .env &&
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"         >> .env &&
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env &&
           echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}"         >> .env &&
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"             >> .env &&
-          echo "SESSION_KEY=${{ secrets.SESSION_KEY }}"             >> .env &&
           cat .env
 
-      - name: Test site endpoints
+      - name: Test website status
         run: >
           docker-compose up -d &&
           sleep 10 &&
-          if curl -s --head  --request GET https://chineseproverbs.duckdns.org | grep "200 OK" > /dev/null; then     
-            echo "site is UP"; 
-          else    
-            echo "site is DOWN"; 
-          fi
+          chmod +x ./website_status.sh
+          ./website_status.sh
