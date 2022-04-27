@@ -5,6 +5,8 @@ chinese_proverbs/.env
 .idea/
 docs/_build/
 .vscode
+nginx-certbot.env
+nginx-conf.conf
 
 # Local .terraform directories
 terraform/
