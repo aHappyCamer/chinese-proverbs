@@ -21,7 +21,7 @@ jobs:
             HostName $SSH_IP
             User $SSH_USER
             IdentityFile ~/.ssh/deploy.key
-            StrictHostKeyChecking yes
+            StrictHostKeyChecking no
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -30,7 +30,8 @@ jobs:
 
       -  name: Print project root directory
          run: >
-           ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }}
+           ssh -i ~/.ssh/deploy.key -o UserKnownHostsFile=/github/home/.ssh/known_hosts -tt $SSH_USER@$SSH_IP "echo test > testfile1"
+           'cd ${{ secrets.PROJECT_ROOT }}
            && sudo git fetch
            && sudo git reset --hard origin/main
            && docker-compose down
