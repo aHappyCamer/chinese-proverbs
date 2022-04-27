@@ -1,5 +1,44 @@
 name: Docker Continuous Integration
 
 on:
+  workflow_run:
+    workflows: [ lint ]
+    branches: [ main ]
+    types: [ completed ]
   pull_request:
     branches: [ main ]
+
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        run: >
+          sudo ./install_docker.sh &&
+          sudo systemctl start docker &&
+          sudo systemctl start containerd
+
+      - name: Set up env
+        run: >-
+          echo "CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }} > nginx-certbot.env &&
+          touch .env &&
+          echo "URL=localhost:5000" >> .env &&
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"         >> .env &&
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env &&
+          echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}"         >> .env &&
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"             >> .env &&
+          echo "SESSION_KEY=${{ secrets.SESSION_KEY }}"             >> .env &&
+          cat .env
+
+      - name: Test site endpoints
+        run: >
+          docker-compose up -d &&
+          sleep 10 &&
+          if curl -s --head  --request GET https://chineseproverbs.duckdns.org | grep "200 OK" > /dev/null; then     
+            echo "site is UP"; 
+          else    
+            echo "site is DOWN"; 
+          fi
