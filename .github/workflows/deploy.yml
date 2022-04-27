@@ -22,6 +22,7 @@ jobs:
             User $SSH_USER
             IdentityFile ~/.ssh/deploy-key
             StrictHostKeyChecking no
+            UserKnownHostsFile ~/.ssh/known_hosts
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
@@ -30,7 +31,7 @@ jobs:
 
       -  name: Print project root directory
          run: >
-           ssh -o UserKnownHostsFile=~/.ssh/known_hosts my-vm 'cd ${{ secrets.PROJECT_ROOT }}
+           ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }}
            && sudo git fetch
            && sudo git reset --hard origin/main
            && docker-compose down
