@@ -1,13 +1,13 @@
 name: Docker Continuous Integration
 
 on:
-  workflow_run:
-    workflows: [ lint ]
-    branches: [ main ]
-    types: [ completed ]
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-
+    branches:
+      - main
+  
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
