@@ -16,14 +16,12 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy.key
           chmod 600 ~/.ssh/deploy.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           cat >>~/.ssh/config <<END
           Host my-vm
             HostName $SSH_IP
             User $SSH_USER
             IdentityFile ~/.ssh/deploy.key
-            StrictHostKeyChecking no
-            UserKnownHostsFile ~/.ssh/known_hosts
+            StrictHostKeyChecking yes
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
