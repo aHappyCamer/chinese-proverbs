@@ -30,7 +30,7 @@ jobs:
 
       -  name: Print project root directory
          run: >
-           ssh -o UserKnownHostsFile=/github/home/.ssh/known_hosts my-vm
+           ssh -o UserKnownHostsFile=~/.ssh/known_hosts my-vm
            'cd ${{ secrets.PROJECT_ROOT }}
            && sudo git fetch
            && sudo git reset --hard origin/main
