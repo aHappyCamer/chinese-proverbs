@@ -24,7 +24,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
         
         cd ${{ secrets.PROJECT_ROOT }} && 
-        git fetch && 
-        git reset --hard origin/main && 
+        sudo git fetch && 
+        sudo git reset --hard origin/main && 
         docker-compose down && 
         docker-compose up -d --build '
