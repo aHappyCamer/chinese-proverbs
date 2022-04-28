@@ -13,18 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Adding Known Hosts
-      run: ssh-keyscan -H ${{ secrets.SSH_IP }} >> ~/.ssh/known_hosts
-
     - name: Deploy in EC2
       env:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         HOSTNAME : ${{ secrets.SSH_IP }}
-        USER_NAME : ${{ secrets.SSH_USER }}
-          
+        USER_NAME : ${{ secrets.SSH_USER }}          
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+        ssh -i private_key -o UserKnownHostsFile=${{ secrets.SSH_KNOWN_HOSTS }} -tt ${USER_NAME}@${HOSTNAME} '
         
         cd ${{ secrets.PROJECT_ROOT }} && 
         sudo git fetch && 
