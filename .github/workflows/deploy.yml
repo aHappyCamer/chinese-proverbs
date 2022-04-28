@@ -20,7 +20,7 @@ jobs:
         USER_NAME : ${{ secrets.SSH_USER }}          
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -i private_key -o UserKnownHostsFile=${{ secrets.SSH_KNOWN_HOSTS }} -o StrictHostKeyChecking=no -tt ${USER_NAME}@${HOSTNAME} '
+        ssh -i private_key -o StrictHostKeyChecking=no -tt ${USER_NAME}@${HOSTNAME} '
         
         cd ${{ secrets.PROJECT_ROOT }} && 
         sudo git fetch && 
