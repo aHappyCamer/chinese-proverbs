@@ -18,7 +18,7 @@ jobs:
       - name: Set up Docker
         run: >
           chmod +x ./install_docker.sh
-          ./install_docker.sh
+          ./scripts/install_docker.sh
 
       - name: Set up env
         run: >
@@ -37,4 +37,4 @@ jobs:
           docker-compose up -d &&
           sleep 10 &&
           chmod +x ./website_status.sh
-          ./website_status.sh
+          ./scripts/website_status.sh
