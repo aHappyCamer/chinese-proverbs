@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
     - name: Deploy in EC2
       env:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -20,7 +19,7 @@ jobs:
         USER_NAME : ${{ secrets.SSH_USER }}          
       run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -i private_key -o StrictHostKeyChecking=no -tt ${USER_NAME}@${HOSTNAME} '
+        ssh -i private_key -o StrictHostKeyChecking=no ${USER_NAME}@${HOSTNAME} '
         
         cd ${{ secrets.PROJECT_ROOT }} && 
         sudo git fetch && 
