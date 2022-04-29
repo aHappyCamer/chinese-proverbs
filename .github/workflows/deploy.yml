@@ -31,7 +31,6 @@ jobs:
       -  name: Print project root directory
          run: >
            ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }}
-            echo "Project root directory: ${{ secrets.PROJECT_ROOT }}"'
            && git fetch
            && git reset --hard origin/main
            && docker-compose down
