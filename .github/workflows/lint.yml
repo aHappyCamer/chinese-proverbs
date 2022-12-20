@@ -1,31 +1,31 @@
-name: Lint
+# name: Lint
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-jobs:
-  run-linters:
-    name: Run linters
-    runs-on: ubuntu-latest
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+# jobs:
+#   run-linters:
+#     name: Run linters
+#     runs-on: ubuntu-latest
     
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Check out Git repository
+#         uses: actions/checkout@v3
 
-      - name: Set up python
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.8
+#       - name: Set up python
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: 3.8
 
-      - name: Install python dependencies
-        run: pip install black flake8
+#       - name: Install python dependencies
+#         run: pip install black flake8
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          black: true
-          flake8: true
+#       - name: Run linters
+#         uses: wearerequired/lint-action@v2
+#         with:
+#           black: true
+#           flake8: true
