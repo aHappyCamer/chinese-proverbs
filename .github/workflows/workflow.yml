@@ -41,4 +41,4 @@ jobs:
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Verify deployment
-      run: kubectl rollout status deployment/chinese-proverbs
+      run: kubectl rollout status deployment/web
