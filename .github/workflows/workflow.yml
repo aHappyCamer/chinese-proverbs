@@ -1,3 +1,5 @@
+name: Build, push, and deploy
+
 on:
   push:
     branches:
@@ -33,7 +35,7 @@ jobs:
       run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|chinese-proverbs|registry.digitalocean.com/do-rocket/chinese-proverbs:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Save DigitalOcean kubeconfig with short-lived credentials
-      run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 <cluster-name>
+      run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 tl-testcluster
 
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
