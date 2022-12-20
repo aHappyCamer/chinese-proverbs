@@ -30,7 +30,7 @@ jobs:
       run: docker push registry.digitalocean.com/do-rocket/chinese-proverbs:$(echo $GITHUB_SHA | head -c7)
 
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/do-rocket/chinese-proverbs:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|chinese-proverbs|registry.digitalocean.com/do-rocket/chinese-proverbs:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Save DigitalOcean kubeconfig with short-lived credentials
       run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 <cluster-name>
@@ -39,4 +39,4 @@ jobs:
       run: kubectl apply -f $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: Verify deployment
-      run: kubectl rollout status deployment/<deployment_name>
+      run: kubectl rollout status deployment/chinese-proverbs
