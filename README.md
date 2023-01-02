@@ -11,6 +11,7 @@ Tech Used: BeautifulSoup, Terraform, AWS, Flask, PostgreSQL, Nginx, Docker, GitH
 Beautiful Soup was used to scrape Chinese proverbs and their respective pinyin and literal translation. 
 
 ## Optimizations
+Github - using different branches
 
 ## Lessons Learned:
 
