@@ -1,40 +1,40 @@
-# name: Docker Continuous Integration
+name: Docker Continuous Integration
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   
-# jobs:
-#   test_pull_request:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name:  Check out Git repository
-#         uses: actions/checkout@v3
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Check out Git repository
+        uses: actions/checkout@v3
 
-#       - name: Set up Docker
-#         run: >
-#           chmod +x ./scripts/install_docker.sh
-#           ./scripts/install_docker.sh
+      - name: Set up Docker
+        run: >
+          chmod +x ./scripts/install_docker.sh
+          ./scripts/install_docker.sh
 
-#       - name: Set up env
-#         run: >
-#           echo "CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}" > nginx-certbot.env &&
-#           touch .env &&
-#           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"         >> .env &&
-#           echo "POSTGRES_PASS=${{ secrets.POSTGRES_PASS }}"         >> .env &&
-#           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env &&
-#           echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}"         >> .env &&
-#           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"             >> .env &&
-#           echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}"         >> .env &&
-#           cat .env
+      - name: Set up env
+        run: >
+          echo "CERTBOT_EMAIL=${{ secrets.CERTBOT_EMAIL }}" > nginx-certbot.env &&
+          touch .env &&
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"         >> .env &&
+          echo "POSTGRES_PASS=${{ secrets.POSTGRES_PASS }}"         >> .env &&
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env &&
+          echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}"         >> .env &&
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"             >> .env &&
+          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}"         >> .env &&
+          cat .env
 
-#       - name: Test website status
-#         run: >
-#           docker-compose up -d &&
-#           sleep 10 &&
-#           chmod +x ./scripts/website_status.sh
-#           ./scripts/website_status.sh
+      - name: Test website status
+        run: >
+          docker-compose up -d &&
+          sleep 10 &&
+          chmod +x ./scripts/website_status.sh
+          ./scripts/website_status.sh
