@@ -8,6 +8,7 @@ docs/_build/
 nginx-certbot.env
 user_conf.d/
 terraform
+playbook/
 
 # Local .terraform directories
 **/.terraform/*
