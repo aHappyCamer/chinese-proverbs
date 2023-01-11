@@ -16,14 +16,15 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
           chmod 600 ~/.ssh/deploy-key.pem
-          cat >> ~/.ssh/config <<END
-          Host my-vm
-            HostName $SSH_IP
-            User $SSH_USER
-            IdentityFile ~/.ssh/deploy-key.pem
-            ForwardAgent yes
-            StrictHostKeyChecking no
-          END
+          ssh-keyscan -H "$SSH_IP" > ~/.ssh/known_hosts
+#          cat >> ~/.ssh/config <<END
+ #         Host my-vm
+ #           HostName $SSH_IP
+ #           User $SSH_USER
+ #           IdentityFile ~/.ssh/deploy-key.pem
+ #           ForwardAgent yes
+ #           StrictHostKeyChecking no
+ #         END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
@@ -33,10 +34,13 @@ jobs:
         uses: actions/checkout@v2     
           
       - name: Print project root directory
-        run: >
-            ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} 
-            && pwd           
-            && git fetch
-            && git reset --hard origin/main
-            && docker compose down
-            && docker compose up -d --build'
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.PROJECT_ROOT }} && git checkout ${{ secrets.MAIN_BRANCH }} && git fetch && git reset --hard origin/main && docker compose down && docker compose up -d --build"
+      - name: cleanup
+        run: rm -rf ~/.ssh
+            
+#            ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} 
+#            && pwd           
+#            && git fetch
+#            && git reset --hard origin/main
+#            && docker compose down
+#            && docker compose up -d --build'
