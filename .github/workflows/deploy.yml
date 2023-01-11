@@ -32,11 +32,8 @@ jobs:
         uses: actions/checkout@v2     
           
       - name: SSH into Instance
-        run: ssh my-vm 
-        
-      - name: Print project root directoryRun commands
         run: |
-           'cd ${{ secrets.PROJECT_ROOT }} && pwd && ${{ secrets.PATH }} && git reset --hard origin/main'
+          ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && pwd && ${{ secrets.PATH }} && git reset --hard origin/main'
         
       - name: cleanup
         run: rm -rf ~/.ssh
