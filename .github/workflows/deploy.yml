@@ -15,8 +15,8 @@ jobs:
         run: | 
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy-key.pem
-          chmod 600 ~/.ssh/deploy-key.pem
-          ssh-keyscan -H "$SSH_IP" > ~/.ssh/known_hosts
+          sudo chmod 600 ~/.ssh/deploy-key.pem
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
 #          cat >> ~/.ssh/config <<END
  #         Host my-vm
  #           HostName $SSH_IP
@@ -27,14 +27,15 @@ jobs:
  #         END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
 
       - name: Checkout Repository
         uses: actions/checkout@v2     
           
       - name: Print project root directory
-        run: ssh -i ${{ secrets.TOKEN }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "cd ${{ secrets.PROJECT_ROOT }} && git checkout ${{ secrets.MAIN_BRANCH }} && git fetch && git reset --hard origin/main && docker compose down && docker compose up -d --build"
+        run: ssh -i ${{ secrets.SSH_KEY_PATH }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "cd ${{ secrets.PROJECT_ROOT }} && git checkout ${{ secrets.MAIN_BRANCH }} && git fetch && git reset --hard origin/main && docker compose down && docker compose up -d --build"
       - name: cleanup
         run: rm -rf ~/.ssh
             
