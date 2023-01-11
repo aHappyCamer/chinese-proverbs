@@ -30,10 +30,9 @@ jobs:
           
       - name: Print project root directory
         run: >
-           ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && pwd
-           && ssh -T git@github.com'
-           
-#           && git fetch
-#           && git reset --hard origin/main
-#           && docker compose down
-#           && docker compose up -d --build'
+            ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} 
+            && pwd           
+            && git fetch
+            && git reset --hard origin/main
+            && docker compose down
+            && docker compose up -d --build'
