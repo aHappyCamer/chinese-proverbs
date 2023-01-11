@@ -28,22 +28,12 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
           
-      - name: SSH Remote Commands
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.IP }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            echo "Hello, world"
-            whoami
-          
-#       - name: Print project root directory
-#         run: >
-#            ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && pwd
-#            && ssh -T git@github.com
-#            && git fetch
-#            && git reset --hard origin/main
-#            && docker compose down
-#            && docker compose up -d --build'
+      - name: Print project root directory
+        run: >
+           ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && pwd
+           && ssh -T git@github.com'
+           
+#           && git fetch
+#           && git reset --hard origin/main
+#           && docker compose down
+#           && docker compose up -d --build'
