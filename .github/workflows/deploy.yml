@@ -26,8 +26,11 @@ jobs:
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
           SSH_IP: ${{ secrets.SSH_IP }}
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2     
           
       - name: Print project root directory
         run: >
