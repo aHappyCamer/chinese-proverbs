@@ -36,13 +36,8 @@ jobs:
           key: ${{ secrets.SSH_REPO_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-             cd ${{ secrets.PROJECT_ROOT }} 
-             && pwd
-             && ssh -T git@github.com
-             && git fetch
-             && git reset --hard origin/main
-             && docker compose down
-             && docker compose up -d --build
+            echo "Hello, world"
+            whoami
           
 #       - name: Print project root directory
 #         run: >
