@@ -21,6 +21,7 @@ jobs:
             HostName $SSH_IP
             User $SSH_USER
             IdentityFile ~/.ssh/deploy-key.pem
+            ForwardAgent yes
             StrictHostKeyChecking no
           END
         env:
