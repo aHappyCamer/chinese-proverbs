@@ -36,7 +36,7 @@ jobs:
         
       - name: Print project root directoryRun commands
         run: |
-           'cd ${{ secrets.PROJECT_ROOT }} && pwd && git fetch'
+           'cd ${{ secrets.PROJECT_ROOT }} && pwd && ${{ secrets.PATH }} && git reset --hard origin/main'
         
       - name: cleanup
         run: rm -rf ~/.ssh
