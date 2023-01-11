@@ -33,12 +33,11 @@ jobs:
           
       - name: SSH into Instance
         run: |
-          ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && pwd && ${{ secrets.PATH }} && git reset --hard origin/main'
+          ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} 
+            && pwd && ${{ secrets.PATH }} 
+            && git reset --hard origin/main
+            && docker compose down
+            && docker compose up -d --build'
         
       - name: cleanup
         run: rm -rf ~/.ssh
-        
-#            && git fetch
-#            && git reset --hard origin/main
-#            && docker compose down
-#            && docker compose up -d --build'
