@@ -34,7 +34,7 @@ jobs:
       - name: SSH into Instance
         run: |
           ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} 
-            && pwd && ${{ secrets.PATH }} 
+            && ${{ secrets.PATH }} 
             && git reset --hard origin/main
             && docker compose down
             && docker compose up -d --build'
