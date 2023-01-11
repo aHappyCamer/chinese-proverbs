@@ -33,7 +33,7 @@ jobs:
         with:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_REPO_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
             echo "Hello, world"
